@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {Form, Button} from 'react-bootstrap'
 import {validateFields} from '../utils/common'
 import {Link} from 'react-router-dom'
-import { render } from 'react-dom'
 
 class Register extends Component{
     state = {
@@ -30,7 +29,9 @@ class Register extends Component{
         const allFieldsEntered = validateFields(fieldsToValidate)
         if(!allFieldsEntered){
             this.setState({
-                errorMsg: 'Please enter all fields'
+                errorMsg: {
+                    signup_error:'Please enter all fields'
+                }
             });
         } else {
             if(password !== cpassword){
@@ -59,7 +60,7 @@ class Register extends Component{
                 <h2>Register New User</h2>
                 <div className="login-form">
                     <Form onSubmit={this.registerUser}>
-                        {errorMsg && errorMsg.signup_error ? (
+                        { errorMsg && errorMsg.signup_error ? (
                                 <p className="errorMsg centered-message">
                                     { errorMsg.signup_error }
                                 </p>
@@ -67,25 +68,25 @@ class Register extends Component{
                             isSubmitted && (
                                 <p className="successMsg centered-message">{successMsg}</p>
                             )
-                        )};
+                        )}
                         <Form.Group controlId="first_name">
                             <Form.Label>First name</Form.Label>
                             <Form.Control type="text" name="first_name" placeholder="Enter first name" onChange={this.handleInputChange}/>
                         </Form.Group>
                         <Form.Group controlId="last_name">
-                            <Form.Label>First name</Form.Label>
+                            <Form.Label>Last Name</Form.Label>
                             <Form.Control type="text" name="last_name" placeholder="Enter last name" onChange={this.handleInputChange}/>
                         </Form.Group>
                         <Form.Group controlId="email">
-                            <Form.Label>First name</Form.Label>
+                            <Form.Label>Email</Form.Label>
                             <Form.Control type="email" name="email" placeholder="Enter email address" onChange={this.handleInputChange}/>
                         </Form.Group>
                         <Form.Group controlId="password">
-                            <Form.Label>First name</Form.Label>
+                            <Form.Label>Password</Form.Label>
                             <Form.Control type="password" name="password" placeholder="Enter password" onChange={this.handleInputChange}/>
                         </Form.Group>
                         <Form.Group controlId="cpassword">
-                            <Form.Label>First name</Form.Label>
+                            <Form.Label>Confirm Password</Form.Label>
                             <Form.Control type="password" name="cpassword" placeholder="Confirm Password" onChange={this.handleInputChange}/>
                         </Form.Group>
 

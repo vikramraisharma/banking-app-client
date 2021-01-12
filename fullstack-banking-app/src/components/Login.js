@@ -20,10 +20,11 @@ class Login extends Component{
         if(!allFieldsEntered){
             this.setState({
                 errorMsg: {
-                    signin_error: ''
+                    signin_error: 'Please enter all fields.'
                 }
             })
             // login successful
+            console.log(this.state.errorMsg);
         }
     }
 
