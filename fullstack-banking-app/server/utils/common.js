@@ -31,7 +31,7 @@ const validateUser = async (email, password) => {
 const generateAuthToken = async (user) => {
     const { userid, email} = user;
     const secret = process.env.secret;
-    const token = await jwt.sign({user, email}, secret);
+    const token = await jwt.sign({userid, email}, secret);
     return token;
 }
 
