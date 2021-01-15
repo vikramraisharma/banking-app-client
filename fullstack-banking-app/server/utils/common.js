@@ -9,8 +9,9 @@ const isInvalidField = (receivedFields, validFieldsToUpdate) => {
 }
 
 const validateUser = async (email, password) => {
+    // console.log("login initiated");
     const result = await pool.query(
-        'SELECT user_id, email, password FROM bank_user WHERE email = $1',
+        'SELECT userid, email, password FROM bank_user WHERE email = $1',
         [email]
     );
     const user = result.rows[0]

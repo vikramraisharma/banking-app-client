@@ -11,8 +11,11 @@ const authMiddleware = require('../middleware/auth')
 const Router = express.Router()
 
 Router.post('/signup', async (req, res) => {
+    console.log('signup hit');
     try{
+        console.log('try hit');
         const { first_name, last_name, email, password } = req.body;
+        // console.log(req.body);
         const validFieldsToUpdate = [
             'first_name',
             'last_name',
@@ -25,7 +28,7 @@ Router.post('/signup', async (req, res) => {
             receivedFields,
             validFieldsToUpdate
         )
-
+        // console.log(isInvalidFieldProvided);
         if(isInvalidFieldProvided) {
             return res.status(400).send({
                 signup_error: 'Invalid Field.'
@@ -37,6 +40,7 @@ Router.post('/signup', async (req, res) => {
             [email]
         )
         const count = result.rows[0].count;
+        console.log(result.rows[0], count);
         if(count > 0){
             return res.status(400).send({
                 signup_error: 'User with this email already exists'
@@ -57,8 +61,10 @@ Router.post('/signup', async (req, res) => {
 });
 
 Router.post('/signin', async (req, res) => {
+    console.log('sign in hit');
     try {
         const { email, password } = req.body;
+        console.log(req.body);
         const user = await validateUser(email, password);
         if(!user){
             res.status(400).send({

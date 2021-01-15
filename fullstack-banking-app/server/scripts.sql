@@ -15,5 +15,5 @@ CREATE TABLE tokens(
     id BIGSERIAL PRIMARY KEY NOT NULL,
     access_token VARCHAR(500) NOT NULL,
     userid BIGSERIAL NOT NULL,
-    FOREIGN KEY(user_id) REFERENCES bank_user(user_id)
+    FOREIGN KEY(userid) REFERENCES bank_user(userid)
 );

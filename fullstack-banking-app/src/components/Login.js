@@ -3,12 +3,25 @@ import {connect} from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
 import { validateFields } from '../utils/common'
 import {Link} from 'react-router-dom'
+import {initiateLogin} from '../actions/auth'
+import _ from 'lodash'
+import { resetErrors } from '../actions/errors'
 
 class Login extends Component{
     state = {
         email: '',
         password: '',
         errorMsg: ''
+    }
+
+    componentDidUpdate(prevProps) {
+        if(!_.isEqual(prevProps.errors, this.props.errors)){
+            this.setState({ errorMsg: this.props.errors })
+        }
+    }
+
+    componentWillUnmount(prevProps){
+        this.props.dispatch(resetErrors())
     }
 
     handleLogin = (event) => {
@@ -25,6 +38,13 @@ class Login extends Component{
             })
             // login successful
             console.log(this.state.errorMsg);
+        } else {
+            this.setState({
+                errorMsg: {
+                    signin_error: ''
+                }
+            });
+            this.props.dispatch(initiateLogin(email,password))
         }
     }
 
@@ -40,7 +60,6 @@ class Login extends Component{
 
         return(
             <div className="login-page">
-                <h1>Banking Application</h1>
                 <div className="login-form">
                     <Form onSubmit={this.handleLogin}>
                         { errorMsg && errorMsg.signin_error && (
@@ -71,4 +90,8 @@ class Login extends Component{
     }
 }
 
-export default connect()(Login)
+const mapStateToProps = (state) => ({
+    errors: state.errors
+})
+
+export default connect(mapStateToProps)(Login)

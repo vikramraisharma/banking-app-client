@@ -3,6 +3,9 @@ import {connect} from 'react-redux'
 import {Form, Button} from 'react-bootstrap'
 import {validateFields} from '../utils/common'
 import {Link} from 'react-router-dom'
+import { registerNewUser } from '../actions/auth'
+import {resetErrors} from '../actions/errors'
+import _ from 'lodash';
 
 class Register extends Component{
     state = {
@@ -16,8 +19,19 @@ class Register extends Component{
         isSubmitted: false
     };
 
+    componentDidUpdate(prevProps){
+        if(!_.isEqual(prevProps.errors, this.props.errors)) {
+            this.setState({ errorMsg: this.props.errors });
+        }
+    }
+
+    componentWillUnmount(){
+        this.props.dispatch(resetErrors())
+    }
+
     registerUser = (event) => {
         event.preventDefault()
+        console.log('register hit');
         const { first_name, last_name, email, password, cpassword } = this.state;
         const fieldsToValidate = [
             { first_name },
@@ -42,6 +56,16 @@ class Register extends Component{
                 });
             } else {
                 this.setState({ isSubmitted: true });
+                this.props
+                    .dispatch(registerNewUser({ first_name, last_name, email, password}))
+                    .then((response) => {
+                        if(response.success){
+                            this.setState({
+                                successMsg: "User registered successfully",
+                                errorMsg: ''
+                            })
+                        }
+                    })
             }
         }
     };
@@ -105,4 +129,8 @@ class Register extends Component{
     }
 }
 
-export default connect()(Register)
+const mapStateToProps = (state) => ({
+    errors: state.errors
+})
+
+export default connect(mapStateToProps)(Register)
