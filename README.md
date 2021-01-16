@@ -7,7 +7,7 @@ Originally built by Yogesh Chavan, [Tutorial Part 1](https://medium.com/javascri
 ### For more of my work, visit my portfolio [here](https://www.vikramraisharma.dev/)!
 
 ## To view the application locally:
-1. Clone repo and run `yarn install` in both fullstack-banking-app directory and /server directory
+1. Clone repo and run `yarn install` in both `fullstack-banking-app` directory and `/server` directory
 2. Copy and paste commands from `server/scripts.sql` into your local PostGreSQL CLI
 3. Run `yarn start` in both `src` and `server` folders
 4. Open [localhost](http://localhost:3000) to view the React App
