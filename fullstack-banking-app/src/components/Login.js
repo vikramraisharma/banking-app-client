@@ -60,6 +60,7 @@ class Login extends Component{
 
         return(
             <div className="login-page">
+                <h1>Banking Application</h1>
                 <div className="login-form">
                     <Form onSubmit={this.handleLogin}>
                         { errorMsg && errorMsg.signin_error && (
