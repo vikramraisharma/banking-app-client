@@ -9,14 +9,22 @@ Originally built by Yogesh Chavan, [Tutorial Part 1](https://medium.com/javascri
 ## To view the application locally:
 1. Clone repo and run `yarn install` in both `fullstack-banking-app` directory and `/server` directory
 2. Copy and paste commands from `server/scripts.sql` into your local PostgreSQL CLI
-3. Run `yarn start` in both `src` and `server` folders
+3. Run `yarn start` in both `fullstack-banking-app/` and `fullstack-banking-app/server/` folders
 4. Open [localhost](http://localhost:3000) to view the React App
-5. Create an account, sign in, and explore!
+
+## As a user, what can you do in this app?
+- Create an account and log in/out
+- Edit the name of your account (only when signed in)
+- Create bank accounts, withdraw and deposit funds
+- Download a spreadsheet summary of your accounts.
 
 ## Key learning areas:
-- PERN stack (PostgreSQL, Express, React/Redux, Node)
-- Using Redux to handle errors and state accross routes/components
-- Lifecycle of React state/props, passing information down the State tree
+- Using Redux to send/update data to `state` across components
 - Using Axios to exchange information between Node API and React app
 - Basics of JWT and using authorization tokens/middleware
+- Using EJS, and other React libraries to download transactional data as a spreadsheet
+- Using SCSS to override default React Bootstrap styling methods compared to relying on native bootstrap and CSS3.
+
+## What is Redux, and how does this app use it?
+React Redux gives your React app the ability to read data from a "Redux store." The Redux library also lets a user execute `dispatch` functions to update data in the store. Redux uses a function called `mapStateToProps`, and `mapStateToProps` is called in each component file connected to the redux store in order to update specific information within the Redux store. In this app, I use the `return` method built into redux to send key/value pairs into the `state` of the component itself. This is a unique (and efficient!) way of passing information into a React component compared to manually passing props into state. 
 
