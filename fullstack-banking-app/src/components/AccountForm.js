@@ -3,17 +3,17 @@ import {connect} from 'react-redux';
 import {Form, Button} from 'react-bootstrap';
 import {validateFields} from '../utils/common';
 import _ from 'lodash';
-// import {
-//     initiateGetAccntDetails,
-//     initiateAddAccntDetails,
-//     initiateUpdateAccntDetails
-// } from '../actions/account';
-// import {
-//     initiateWithdrawAmount,
-//     initiateDepostAmount
-// } from '../actions/transactions';
+import {
+    initiateGetAccntDetails,
+    initiateAddAccntDetails,
+    initiateUpdateAccntDetails
+} from '../actions/account';
+import {
+    initiateWithdrawAmount,
+    initiateDepositAmount
+} from '../actions/transactions';
 import {resetErrors} from '../actions/errors';
-// import {maskNumber} from '../utils/mask';
+import {maskNumber} from '../utils/mask';
 import AddAccountForm from './AddAccountForm';
 
 class AccountForm extends Component{
@@ -89,7 +89,9 @@ class AccountForm extends Component{
         if(!allFieldsEntered) {
             this.setState({
                 errorMsg: {
-                    [selectedType === 'withdraw' ? 'withdraw_error' : 'add_error']: 'Please enter an amount'
+                    [selectedType === 'withdraw' 
+                    ? 'withdraw_error' 
+                    : 'add_error']: 'Please enter an amount'
                 }
             });
         } else {
@@ -109,7 +111,9 @@ class AccountForm extends Component{
             } else {
                 this.setState({
                     errorMsg: {
-                        [selectedType === 'withdraw' ? 'withdraw_error' : 'add_error']: "Insufficient balance for withdrawal amount."
+                        [selectedType === 'withdraw' 
+                        ? 'withdraw_error' 
+                        : 'add_error']: "Insufficient balance for withdrawal amount."
                     }
                 })
             }
@@ -119,7 +123,7 @@ class AccountForm extends Component{
     handleAddAccount = (account) => {
         const {account_no, bank_name, ifsc} = account;
         this.props
-            .dispatch(initaiteAddAccntDetails(account_no, bank_name, ifsc))
+            .dispatch(initiateAddAccntDetails(account_no, bank_name, ifsc))
             .then(() => this.props.dispatch(initiateGetAccntDetails()))
     }
 
@@ -194,4 +198,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 })
 
-export default connect()(AccountForm)
+export default connect(mapStateToProps)(AccountForm)

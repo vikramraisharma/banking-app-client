@@ -6,4 +6,14 @@ const pool = new Pool({
     port: 5432,
     database: 'bank_account'
 })
-module.exports = {pool}
+
+const getClient = async () => {
+    try {
+        const client = await pool.connect();
+        return client
+    } catch (error){
+        return null 
+    }
+}
+
+module.exports = {pool, getClient}

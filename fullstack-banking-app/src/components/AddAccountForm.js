@@ -59,12 +59,20 @@ class AddAccountForm extends Component {
                     <Form.Group controlId="accnt-no">
                         <Form.Label>Account number:</Form.Label>
                         <Form.Control type="text" 
-                        name="bank_name" 
-                        placeholder="Enter your bank name" 
-                        value={bank_name} 
+                        name="account_no" 
+                        placeholder="Enter 10 digit account number" 
+                        value={account_no} 
                         onChange={this.handleInputChange}/>
                     </Form.Group>
-                    <Form.Group controlId="fisc">
+                    <Form.Group controlId="accnt-no">
+                        <Form.Label>Bank name:</Form.Label>
+                        <Form.Control type="text"
+                        name="bank_name"
+                        placeholder="Enter bank name"
+                        value={bank_name}
+                        onChange={this.handleInputChange}/>
+                    </Form.Group>
+                    <Form.Group controlId="ifsc">
                         <Form.Label>IFSC Code:</Form.Label>
                         <Form.Control type="text"
                         name="ifsc"
