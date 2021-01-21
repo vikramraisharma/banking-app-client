@@ -12,7 +12,7 @@ Originally built by Yogesh Chavan, [Tutorial Part 1](https://medium.com/javascri
 3. Run `yarn start` in both `fullstack-banking-app/` and `fullstack-banking-app/server/` folders
 4. Open [localhost](http://localhost:3000) to view the React App
 
-![Account Summary Screenshot](/md-images/summary)
+![Account Summary Screenshot](/md-images/summary.png)
 
 ## As a user, what can you do in this app?
 - Create an account and log in/out
