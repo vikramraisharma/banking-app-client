@@ -25,7 +25,6 @@ class Profile extends Component {
                 email
             });
         }
-        console.log(this.state);
     };
 
     componentDidUpdate(prevProps){

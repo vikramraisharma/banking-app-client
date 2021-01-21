@@ -3,7 +3,7 @@ const authMiddleware = require('../middleware/auth')
 const { pool } = require('../db/connect')
 const Router = express.Router()
 
-const getAccountById = async function (account_id) {
+const getAccountByAccountId = async function (account_id) {
     try {
         const result = await pool.query(
             'SELECT * FROM account a INNER JOIN bank_user b ON a.userid = b.userid WHERE a.account_id=$1',
@@ -78,4 +78,4 @@ Router.patch('/account', authMiddleware, async (req, res) => {
     }
 });
 
-module.exports = { Router, getAccountById }
+module.exports = { Router, getAccountByAccountId }

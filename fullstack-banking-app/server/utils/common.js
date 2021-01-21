@@ -1,6 +1,9 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { pool } = require('../db/connect')
+const path = require('path');
+const puppeteer = require('puppeteer');
+const moment = require('moment');
 
 const isInvalidField = (receivedFields, validFieldsToUpdate) => {
     return receivedFields.some(
@@ -36,6 +39,7 @@ const generateAuthToken = async (user) => {
 }
 
 const getTransactions = async (account_id, start_date, end_date) => {
+    // console.log('get transactions reached, start date: ' + start_date + " end date: " + end_date);
     let result;
     try {
         if(start_date && end_date){
@@ -51,7 +55,7 @@ const getTransactions = async (account_id, start_date, end_date) => {
         }
         return result
     } catch (error) {
-        throw new Error()
+        throw 'Error with getTransactions function'
     }
 }
 

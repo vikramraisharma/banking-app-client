@@ -1,3 +1,8 @@
+const path = require('path');
+const fs = require('fs')
+const moment = require('moment')
+const ejs = require('ejs')
+const func = require('./account')
 const express = require('express')
 const authMiddleware = require('../middleware/auth')
 const {getClient} = require('../db/connect');
@@ -97,33 +102,30 @@ Router.get('/download/:id', authMiddleware, async (req, res) => {
         const templateString = ejs.fileLoader(templatePath, 'utf-8');
         const template = ejs.compile(templateString, { filename: templatePath });
         const accountData = await func.getAccountByAccountId(account_id);
-        accountData.account_no = accountData.account_no.slice(-4).padStart(accountData.acccount_no.length, '*');
+        accountData.account_no = accountData.account_no.slice(-4).padStart(accountData.account_no.length, '*');
         const output = template({
             start_date: moment(start_date).format('Do MMMM YYYY'),
             end_date: moment(end_date).format('Do MMMM YYYY'),
             account: accountData,
             transactions: result.rows
         })
-
         fs.writeFileSync(
             path.join(basePath, 'transactions.html'),
             output,
             (error) => {
                 if(error){
-                    throw new Error();
+                    throw "Error writing file"
                 }
             }
         )
-        // res.sendFile(path.join(basePath, 'transactions.html'));
-        
         const pdfSize = await generatePDF(basePath);
         res.set({
-            'Content-Type': 'application/pdf',
-            'Content-Length': pdfSize
-        })
-        res.sendFile(path.join(basePath,'transactions.pdf'))
-
+        'Content-Type': 'application/pdf',
+        'Content-Length': pdfSize
+        });
+        res.sendFile(path.join(basePath, 'transactions.pdf'));
     } catch(error) {
+        console.log('Error inside of download route');
         res.status(400).send({
             transactions_error: 'Error while downloading PDF, try again later'
         })

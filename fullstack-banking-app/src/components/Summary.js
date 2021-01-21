@@ -150,7 +150,10 @@ class Summary extends Component{
                                 <Button
                                     variant="primary"
                                     type="button"
-                                    onClick={() => this.downloadReport(account.account_id, startDate, endDate)}
+                                    onClick={() => {
+                                        console.log('attempt download function');
+                                        this.downloadReport(account.account_id, startDate, endDate)
+                                    }}
                                 >
                                     Download
                                 </Button>
